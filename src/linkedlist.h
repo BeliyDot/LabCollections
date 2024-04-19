@@ -17,7 +17,7 @@ private:
 
     std::unique_ptr<Node> head;
     int size;
-    void checkIndex(int index) {
+    void checkIndex(int index) const {
         if(index < 0 || index >= size) throw std::out_of_range("Index out of range");
     }
 public:
@@ -78,7 +78,6 @@ public:
         return current->data;
     }
     void insertAtIndex(T value, int index) {
-        checkIndex(index);
         if(index == 0) {
             insertAtBeginning(value);
             return;
@@ -88,7 +87,8 @@ public:
             return;
         }
         
-        std::unique_ptr<Node> newNode = std::make_unique(value);
+        checkIndex(index);
+        std::unique_ptr<Node> newNode = std::make_unique<Node>(value);
         Node *current = head.get();
 
         for(int i = 0; i < index - 1; i++) {
@@ -100,7 +100,6 @@ public:
         size++;
     }
     void removeAtIndex(int index) {
-        checkIndex(index);
         if(index == 0) {
             removeFromBeginning();
             return;
@@ -110,6 +109,7 @@ public:
             return;
         }
 
+        checkIndex(index);
         Node *current = head.get();
         for(int i = 0; i < index - 1; i++) {
             current = current->next.get();
