@@ -117,7 +117,7 @@ public:
         current->next = std::move(current->next->next);
         size--;
     }
-    bool isEmpty() {
+    bool isEmpty() const {
         if(size == 0) return true;
         else return false;
     }
