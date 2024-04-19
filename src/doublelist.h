@@ -13,7 +13,7 @@ private:
         T data;
         std::shared_ptr<Node> next;
         std::weak_ptr<Node> previous;
-        Node(T value): data{value}, next{nullptr}, previous{nullptr} {}
+        Node(T value): data{value} {}
     };
 
     std::shared_ptr<Node> head;
@@ -97,13 +97,13 @@ public:
             head = tail = nullptr;
         }
         else {
-            tail = tail->previous;
+            tail = tail->previous.lock();
             tail->next.reset();
         }
         --size;
     }
 
-    void removeAtIndex(T value, int index) {
+    void removeAtIndex(int index) {
         if(index == 0) {
             removeFromBeginning();
             return;
@@ -119,7 +119,7 @@ public:
             current = current->next;
         }
         current->next->previous = current->previous;
-        current = current->next;
+        current->previous.lock()->next = current->next;
         --size;
     }
 
