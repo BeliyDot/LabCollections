@@ -122,9 +122,9 @@ public:
         else return false;
     }
     
-    int getSize() { return size; }
+    int getSize() const { return size; }
 
-    bool search(T value) {
+    bool search(T value) const {
         Node *current = head.get();
 
         for(int i = 0; i < size; i++) {
