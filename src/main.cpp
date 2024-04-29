@@ -3,6 +3,7 @@
 #include "doublelist.h"
 #include "priorityQueue.h"
 #include "queue.h"
+#include "stack.h"
 using namespace std;
 
 
@@ -124,6 +125,30 @@ void testPriorityQueue() {
     cout << endl;
 }
 
+void testStack() {
+    StackArray<int> stack1(5);
+    StackList<char> stack2('f');
+
+    stack1.push(3);
+    stack2.push('e');
+
+    stack2.push('4');
+    stack1.push(228);
+
+    cout << stack1.peek() << endl;
+    cout << stack2.peek() << endl;
+
+    while(!stack1.isFull()) stack1.push(21);
+
+    while(!stack1.isEmpty()) cout << stack1.pop() << " ";
+
+    cout << endl;
+
+    while(!stack2.isEmpty()) cout << stack2.pop() << " ";
+    
+    cout << endl;
+}
+
 int main(int argc, char *argv[])
 {
     cout << "Single linked list: " << endl;
@@ -134,4 +159,6 @@ int main(int argc, char *argv[])
     testQueue();
     cout << endl << "Priority Queue: " << endl;
     testPriorityQueue();
+    cout << endl << "Stack: " << endl;
+    testStack();
 }
