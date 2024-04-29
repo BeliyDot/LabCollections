@@ -1,5 +1,4 @@
 #include <iostream>
-#include "queue.h"
 #include "linkedlist.h"
 #include "doublelist.h"
 using namespace std;
@@ -69,25 +68,10 @@ void testList2() {
     cout << list1;
 }
 
-void testQueue() {
-   QueueArray<int> queue(5);
-   queue.enqueue(5);
-   queue.enqueue(10);
-   cout << queue.dequeue() << endl;
-   cout << queue.peek() << endl;
-   cout << queue.isEmpty() << endl;
-   while(!queue.isFull()) queue.enqueue(25);
-   cout << queue.isFull() << endl;
-   while(!queue.isEmpty()) cout << queue.dequeue() << " ";
-   cout << endl << queue.isEmpty() << endl;
-}
-
 int main(int argc, char *argv[])
 {
     cout << "Single linked list: " << endl;
     testList1();
     cout << endl << "Double linked list: " << endl;
     testList2();
-    cout << endl << "Queue with array: " << endl; 
-    testQueue();
 }
