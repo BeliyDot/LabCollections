@@ -8,30 +8,33 @@ template<class T>
 class AscendingPriorityQueue {
 private:
     LinkedList<T> list;
-    T min;
+    T minimum;
 public:
     AscendingPriorityQueue<T>(): list{LinkedList<T>()} {}
-    AscendingPriorityQueue<T>(T value): min{value}, list{LinkedList<T>(value)} {}
+    AscendingPriorityQueue<T>(T value): minimum{value}, list{LinkedList<T>(value)} {}
     
     void enqueue(T value) {
-        if(list.getSize() == 0) min = value;
-        else min = min(min, value);
+        if(list.getSize() == 0) minimum = value;
+        else minimum = std::min(minimum, value);
         
-        list.insertAtEnd(value);
+        list.insertAtEnd(value);        
     }
     
     T dequeue() {
         if(list.isEmpty()) throw std::string{"The queue is empty!"};
 
-        T value = min;
+        T value = minimum;
         for(int i = 0; i < list.getSize(); i++) {
-            if(list[i] == min) {
+            if(list[i] == minimum) {
                 list.removeAtIndex(i);
                 break;
             }
         }
-        for(int i = 0; i < list.getSize(); i++) {
-            min = min(min, value);
+        if(!list.isEmpty()) {
+            minimum = list[0];
+            for(int i = 1; i < list.getSize(); i++) {
+                minimum = std::min(minimum, list[i]);
+            }
         }
         
         return value;
@@ -40,7 +43,7 @@ public:
     T peek() {
         if(list.isEmpty()) throw std::string{"The queue is empty!"};
 
-        return min;
+        return minimum;
     }
     
     bool isEmpty() const { return list.isEmpty(); }
@@ -53,14 +56,14 @@ template<class T>
 class DescendingPriorityQueue {
 private:
     LinkedList<T> list;
-    T max;
+    T maximum;
 public:
     DescendingPriorityQueue<T>(): list{LinkedList<T>()} {}
-    DescendingPriorityQueue<T>(T value): max{value}, list{LinkedList<T>(value)} {}
+    DescendingPriorityQueue<T>(T value): maximum{value}, list{LinkedList<T>(value)} {}
     
     void enqueue(T value) {
-        if(list.getSize() == 0) max = value;
-        else max = max(max, value);
+        if(list.getSize() == 0) maximum = value;
+        else maximum = std::max(maximum, value);
         
         list.insertAtEnd(value);        
     }
@@ -68,15 +71,18 @@ public:
     T dequeue() {
         if(list.isEmpty()) throw std::string{"The queue is empty!"};
 
-        T value = max;
+        T value = maximum;
         for(int i = 0; i < list.getSize(); i++) {
-            if(list[i] == max) {
+            if(list[i] == maximum) {
                 list.removeAtIndex(i);
                 break;
             }
         }
-        for(int i = 0; i < list.getSize(); i++) {
-            max = max(max, value);
+        if(!list.isEmpty()) {
+            maximum = list[0];
+            for(int i = 1; i < list.getSize(); i++) {
+                maximum = std::max(maximum, list[i]);
+            }
         }
         
         return value;
@@ -85,7 +91,7 @@ public:
     T peek() {
         if(list.isEmpty()) throw std::string{"The queue is empty!"};
 
-        return max;
+        return maximum;
     }
     
     bool isEmpty() const { return list.isEmpty(); }
