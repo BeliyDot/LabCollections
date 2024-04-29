@@ -1,6 +1,7 @@
 #include <iostream>
 #include "linkedlist.h"
 #include "doublelist.h"
+#include "queue.h"
 using namespace std;
 
 
@@ -68,10 +69,40 @@ void testList2() {
     cout << list1;
 }
 
+void testQueue() {
+    QueueArray<int> queue(5);
+    QueueLinkedList<char> quetie;
+    
+    cout << "Array: " << endl;
+
+    queue.enqueue(5);
+    queue.enqueue(10);
+    cout << queue.dequeue() << endl;
+    cout << queue.peek() << endl;
+    
+    while(!queue.isFull()) queue.enqueue(23);
+    cout << queue.isFull() << endl;
+
+    while(!queue.isEmpty()) cout << queue.dequeue() << endl;
+    cout << queue.isEmpty() << endl;
+    
+    cout << "Linked list: " << endl;
+    
+    quetie.enqueue('w');
+    quetie.enqueue('5');
+
+    cout << quetie.peek() << endl;
+    quetie.enqueue('4');
+    while(!quetie.isEmpty()) cout << quetie.dequeue() << endl;
+    cout << quetie.isEmpty() << endl;
+}
+
 int main(int argc, char *argv[])
 {
     cout << "Single linked list: " << endl;
     testList1();
     cout << endl << "Double linked list: " << endl;
     testList2();
+    cout << endl << "Queue: " << endl;
+    testQueue();
 }
