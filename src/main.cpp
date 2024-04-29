@@ -1,6 +1,7 @@
 #include <iostream>
 #include "linkedlist.h"
 #include "doublelist.h"
+#include "priorityQueue.h"
 #include "queue.h"
 using namespace std;
 
@@ -97,6 +98,32 @@ void testQueue() {
     cout << quetie.isEmpty() << endl;
 }
 
+void testPriorityQueue() {
+    AscendingPriorityQueue<int> aQueue(3);
+    DescendingPriorityQueue<int> dQueue(3);
+    
+    aQueue.enqueue(5);
+    dQueue.enqueue(5);
+    
+    aQueue.enqueue(1);
+    dQueue.enqueue(1);
+    
+    cout << aQueue.peek() << endl;
+    cout << dQueue.peek() << endl;
+    
+    while(!aQueue.isEmpty()) {
+        cout << aQueue.dequeue() << " ";
+    }
+    
+    cout << endl;
+
+    while(!dQueue.isEmpty()) {
+        cout << dQueue.dequeue() << " ";
+    }
+    
+    cout << endl;
+}
+
 int main(int argc, char *argv[])
 {
     cout << "Single linked list: " << endl;
@@ -105,4 +132,6 @@ int main(int argc, char *argv[])
     testList2();
     cout << endl << "Queue: " << endl;
     testQueue();
+    cout << endl << "Priority Queue: " << endl;
+    testPriorityQueue();
 }
