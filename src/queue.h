@@ -1,6 +1,7 @@
 #ifndef LABCOLLECTIONS_QUEUE_H
 #define LABCOLLECTIONS_QUEUE_H
 
+#include "linkedlist.h"
 #include <stdexcept>
 template <class T>
 class QueueArray { 
@@ -53,6 +54,35 @@ public:
     ~QueueArray<T>() {
         delete arr;
     }
+};
+
+template<class T>
+class QueueLinkedList {
+private:
+    LinkedList<T> list;
+public:
+    QueueLinkedList<T>(): list{LinkedList<T>()} {}
+    QueueLinkedList<T>(T value): list{LinkedList<T>(value)} {}
+
+    void enqueue(T value) {
+        list.insertAtEnd(value);
+    }
+
+    T dequeue() {
+        if(list.isEmpty()) throw std::string{"The queue is empty!"};
+
+        T value = list[0];
+        list.removeFromBeginning();
+        return value;
+    }
+
+    T peek() {
+        if(list.isEmpty()) throw std::string{"The queue is empty!"};    
+        
+        return list[0];
+    }
+    
+    bool isEmpty() const { return list.isEmpty(); }
 };
 
 #endif
